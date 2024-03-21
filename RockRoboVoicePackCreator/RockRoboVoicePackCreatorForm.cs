@@ -111,6 +111,16 @@ namespace RockRoboVoicePackCreator
             }
         }
 
+        private void DownArrowButtonFirst_Click(object sender, EventArgs e)
+        {
+            MainHelper.SelectNextItemInListBox(filesListBoxFirst);
+        }
+
+        private void UpArrowButtonFirst_Click(object sender, EventArgs e)
+        {
+            MainHelper.SelectPreviousItemInListBox(filesListBoxFirst);
+        }
+
         #endregion
 
         #region Second list box controls actions
@@ -151,6 +161,16 @@ namespace RockRoboVoicePackCreator
             {
                 _filesListBoxMenuStripSelected = FilesListBoxNumber.Second;
             }
+        }
+
+        private void DownArrowButtonSecond_Click(object sender, EventArgs e)
+        {
+            MainHelper.SelectNextItemInListBox(filesListBoxSecond);
+        }
+
+        private void UpArrowButtonSecond_Click(object sender, EventArgs e)
+        {
+            MainHelper.SelectPreviousItemInListBox(filesListBoxSecond);
         }
 
         #endregion
@@ -200,9 +220,12 @@ namespace RockRoboVoicePackCreator
 
         private void ToolStripMenuItem1_DropDownOpening(object sender, EventArgs e)
         {
-            SaveToolStripMenuItem.Enabled = _finalFileModels.Any();
-            CheckFilesToolStripMenuItem.Enabled = _finalFileModels.Any();
+            bool isAnyfinalFileModels = _finalFileModels.Any();
+            SaveToolStripMenuItem.Enabled = isAnyfinalFileModels;
+            CheckFilesToolStripMenuItem.Enabled = isAnyfinalFileModels;
             GenerateFilesToolStripMenuItem.Enabled = _finalFileModels.Any(file => file.IsExistsFile());
+            MarkProcessedLinesInOtherListsStripMenuItem.Enabled = isAnyfinalFileModels &&
+                (_filesFirstList.Any() || _filesSecondList.Any());
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -213,6 +236,13 @@ namespace RockRoboVoicePackCreator
         private void GenerateFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MainHelper.GenerateFiles(_finalFileModels, _finalFileNameMask, _isUseFileNameFromFinalList);
+        }
+
+        private void MarkProcessedLinesInOtherListsStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MainHelper.MarkProcessedLinesInOtherLists(_finalFileModels, _filesFirstList, _filesSecondList);
+            _filesFirstList.ResetBindings();
+            _filesSecondList.ResetBindings();
         }
 
         #endregion
