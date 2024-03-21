@@ -45,15 +45,20 @@ namespace RockRoboVoicePackCreator
             PlayButtonSecond = new Button();
             menuStrip1 = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
+            CreateFromTxtToolStripMenuItem = new ToolStripMenuItem();
             OpenToolStripMenuItem = new ToolStripMenuItem();
             SaveToolStripMenuItem = new ToolStripMenuItem();
-            CreateFromTxtToolStripMenuItem = new ToolStripMenuItem();
             CheckFilesToolStripMenuItem = new ToolStripMenuItem();
             GenerateFilesToolStripMenuItem = new ToolStripMenuItem();
+            MarkProcessedLinesInOtherListsStripMenuItem = new ToolStripMenuItem();
             toolTip1 = new ToolTip(components);
             FinalFileNameMaskLabel = new Label();
             FinalFileNameMaskTextBox = new TextBox();
             IsUseFileNameFromFinalListCheckBox = new CheckBox();
+            DownArrowButtonFirst = new Button();
+            UpArrowButtonFirst = new Button();
+            UpArrowButtonSecond = new Button();
+            DownArrowButtonSecond = new Button();
             FilesListBoxContextMenuStrip.SuspendLayout();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -122,7 +127,7 @@ namespace RockRoboVoicePackCreator
             addFilesButtonFirst.Name = "addFilesButtonFirst";
             addFilesButtonFirst.Size = new Size(111, 23);
             addFilesButtonFirst.TabIndex = 3;
-            addFilesButtonFirst.Text = "Обновить список";
+            addFilesButtonFirst.Text = "Изменить список";
             addFilesButtonFirst.UseVisualStyleBackColor = true;
             addFilesButtonFirst.Click += AddFilesButtonFirst_Click;
             // 
@@ -132,51 +137,55 @@ namespace RockRoboVoicePackCreator
             addFilesButtonSecond.Name = "addFilesButtonSecond";
             addFilesButtonSecond.Size = new Size(111, 23);
             addFilesButtonSecond.TabIndex = 4;
-            addFilesButtonSecond.Text = "Обновить список";
+            addFilesButtonSecond.Text = "Изменить список";
             addFilesButtonSecond.UseVisualStyleBackColor = true;
             addFilesButtonSecond.Click += AddFilesButtonSecond_Click;
             // 
             // PlayButtonFirst
             // 
             PlayButtonFirst.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            PlayButtonFirst.BackgroundImage = Properties.Resources.play_icon;
+            PlayButtonFirst.BackgroundImageLayout = ImageLayout.Stretch;
             PlayButtonFirst.Location = new Point(10, 365);
             PlayButtonFirst.Name = "PlayButtonFirst";
-            PlayButtonFirst.Size = new Size(68, 23);
+            PlayButtonFirst.Size = new Size(23, 23);
             PlayButtonFirst.TabIndex = 5;
-            PlayButtonFirst.Text = "Play";
             PlayButtonFirst.UseVisualStyleBackColor = true;
             PlayButtonFirst.Click += PlayButtonFirst_Click;
             // 
             // StopButtonFirst
             // 
             StopButtonFirst.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            StopButtonFirst.Location = new Point(84, 365);
+            StopButtonFirst.BackgroundImage = Properties.Resources.stop_icon;
+            StopButtonFirst.BackgroundImageLayout = ImageLayout.Stretch;
+            StopButtonFirst.Location = new Point(39, 365);
             StopButtonFirst.Name = "StopButtonFirst";
-            StopButtonFirst.Size = new Size(68, 23);
+            StopButtonFirst.Size = new Size(23, 23);
             StopButtonFirst.TabIndex = 6;
-            StopButtonFirst.Text = "Stop";
             StopButtonFirst.UseVisualStyleBackColor = true;
             StopButtonFirst.Click += StopButtonFirst_Click;
             // 
             // StopButtonSecond
             // 
             StopButtonSecond.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            StopButtonSecond.Location = new Point(379, 365);
+            StopButtonSecond.BackgroundImage = Properties.Resources.stop_icon;
+            StopButtonSecond.BackgroundImageLayout = ImageLayout.Stretch;
+            StopButtonSecond.Location = new Point(334, 365);
             StopButtonSecond.Name = "StopButtonSecond";
-            StopButtonSecond.Size = new Size(68, 23);
+            StopButtonSecond.Size = new Size(23, 23);
             StopButtonSecond.TabIndex = 8;
-            StopButtonSecond.Text = "Stop";
             StopButtonSecond.UseVisualStyleBackColor = true;
             StopButtonSecond.Click += StopButtonSecond_Click;
             // 
             // PlayButtonSecond
             // 
             PlayButtonSecond.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            PlayButtonSecond.BackgroundImage = Properties.Resources.play_icon;
+            PlayButtonSecond.BackgroundImageLayout = ImageLayout.Stretch;
             PlayButtonSecond.Location = new Point(305, 365);
             PlayButtonSecond.Name = "PlayButtonSecond";
-            PlayButtonSecond.Size = new Size(68, 23);
+            PlayButtonSecond.Size = new Size(23, 23);
             PlayButtonSecond.TabIndex = 7;
-            PlayButtonSecond.Text = "Play";
             PlayButtonSecond.UseVisualStyleBackColor = true;
             PlayButtonSecond.Click += PlayButtonSecond_Click;
             // 
@@ -191,45 +200,53 @@ namespace RockRoboVoicePackCreator
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { OpenToolStripMenuItem, SaveToolStripMenuItem, CreateFromTxtToolStripMenuItem, CheckFilesToolStripMenuItem, GenerateFilesToolStripMenuItem });
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { CreateFromTxtToolStripMenuItem, OpenToolStripMenuItem, SaveToolStripMenuItem, CheckFilesToolStripMenuItem, GenerateFilesToolStripMenuItem, MarkProcessedLinesInOtherListsStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(116, 20);
             toolStripMenuItem1.Text = "Итоговый список";
             toolStripMenuItem1.DropDownOpening += ToolStripMenuItem1_DropDownOpening;
             // 
+            // CreateFromTxtToolStripMenuItem
+            // 
+            CreateFromTxtToolStripMenuItem.Name = "CreateFromTxtToolStripMenuItem";
+            CreateFromTxtToolStripMenuItem.Size = new Size(369, 22);
+            CreateFromTxtToolStripMenuItem.Text = "Создать из списка .txt";
+            CreateFromTxtToolStripMenuItem.Click += CreateFromTxtToolStripMenuItem_Click;
+            // 
             // OpenToolStripMenuItem
             // 
             OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-            OpenToolStripMenuItem.Size = new Size(264, 22);
+            OpenToolStripMenuItem.Size = new Size(369, 22);
             OpenToolStripMenuItem.Text = "Открыть...";
             OpenToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
             // 
             // SaveToolStripMenuItem
             // 
             SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-            SaveToolStripMenuItem.Size = new Size(264, 22);
+            SaveToolStripMenuItem.Size = new Size(369, 22);
             SaveToolStripMenuItem.Text = "Сохранить";
             SaveToolStripMenuItem.Click += SaveToolStripMenuItem_Click;
-            // 
-            // CreateFromTxtToolStripMenuItem
-            // 
-            CreateFromTxtToolStripMenuItem.Name = "CreateFromTxtToolStripMenuItem";
-            CreateFromTxtToolStripMenuItem.Size = new Size(264, 22);
-            CreateFromTxtToolStripMenuItem.Text = "Создать из списка txt";
-            CreateFromTxtToolStripMenuItem.Click += CreateFromTxtToolStripMenuItem_Click;
             // 
             // CheckFilesToolStripMenuItem
             // 
             CheckFilesToolStripMenuItem.Name = "CheckFilesToolStripMenuItem";
-            CheckFilesToolStripMenuItem.Size = new Size(264, 22);
+            CheckFilesToolStripMenuItem.Size = new Size(369, 22);
             CheckFilesToolStripMenuItem.Text = "Проверить расположение файлов";
+            CheckFilesToolStripMenuItem.Visible = false;
             // 
             // GenerateFilesToolStripMenuItem
             // 
             GenerateFilesToolStripMenuItem.Name = "GenerateFilesToolStripMenuItem";
-            GenerateFilesToolStripMenuItem.Size = new Size(264, 22);
+            GenerateFilesToolStripMenuItem.Size = new Size(369, 22);
             GenerateFilesToolStripMenuItem.Text = "Сформировать файлы";
             GenerateFilesToolStripMenuItem.Click += GenerateFilesToolStripMenuItem_Click;
+            // 
+            // MarkProcessedLinesInOtherListsStripMenuItem
+            // 
+            MarkProcessedLinesInOtherListsStripMenuItem.Name = "MarkProcessedLinesInOtherListsStripMenuItem";
+            MarkProcessedLinesInOtherListsStripMenuItem.Size = new Size(369, 22);
+            MarkProcessedLinesInOtherListsStripMenuItem.Text = "Отметить обработанные строки в остальных списках";
+            MarkProcessedLinesInOtherListsStripMenuItem.Click += MarkProcessedLinesInOtherListsStripMenuItem_Click;
             // 
             // toolTip1
             // 
@@ -268,12 +285,64 @@ namespace RockRoboVoicePackCreator
             IsUseFileNameFromFinalListCheckBox.UseVisualStyleBackColor = true;
             IsUseFileNameFromFinalListCheckBox.CheckedChanged += IsUseFileNameFromFinalListCheckBox_CheckedChanged;
             // 
+            // DownArrowButtonFirst
+            // 
+            DownArrowButtonFirst.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            DownArrowButtonFirst.BackgroundImage = Properties.Resources.arrow_down;
+            DownArrowButtonFirst.BackgroundImageLayout = ImageLayout.Stretch;
+            DownArrowButtonFirst.Location = new Point(68, 365);
+            DownArrowButtonFirst.Name = "DownArrowButtonFirst";
+            DownArrowButtonFirst.Size = new Size(23, 23);
+            DownArrowButtonFirst.TabIndex = 14;
+            DownArrowButtonFirst.UseVisualStyleBackColor = true;
+            DownArrowButtonFirst.Click += DownArrowButtonFirst_Click;
+            // 
+            // UpArrowButtonFirst
+            // 
+            UpArrowButtonFirst.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            UpArrowButtonFirst.BackgroundImage = Properties.Resources.arrow_up;
+            UpArrowButtonFirst.BackgroundImageLayout = ImageLayout.Stretch;
+            UpArrowButtonFirst.Location = new Point(97, 365);
+            UpArrowButtonFirst.Name = "UpArrowButtonFirst";
+            UpArrowButtonFirst.Size = new Size(23, 23);
+            UpArrowButtonFirst.TabIndex = 15;
+            UpArrowButtonFirst.UseVisualStyleBackColor = true;
+            UpArrowButtonFirst.Click += UpArrowButtonFirst_Click;
+            // 
+            // UpArrowButtonSecond
+            // 
+            UpArrowButtonSecond.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            UpArrowButtonSecond.BackgroundImage = Properties.Resources.arrow_up;
+            UpArrowButtonSecond.BackgroundImageLayout = ImageLayout.Stretch;
+            UpArrowButtonSecond.Location = new Point(392, 365);
+            UpArrowButtonSecond.Name = "UpArrowButtonSecond";
+            UpArrowButtonSecond.Size = new Size(23, 23);
+            UpArrowButtonSecond.TabIndex = 17;
+            UpArrowButtonSecond.UseVisualStyleBackColor = true;
+            UpArrowButtonSecond.Click += UpArrowButtonSecond_Click;
+            // 
+            // DownArrowButtonSecond
+            // 
+            DownArrowButtonSecond.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            DownArrowButtonSecond.BackgroundImage = Properties.Resources.arrow_down;
+            DownArrowButtonSecond.BackgroundImageLayout = ImageLayout.Stretch;
+            DownArrowButtonSecond.Location = new Point(363, 365);
+            DownArrowButtonSecond.Name = "DownArrowButtonSecond";
+            DownArrowButtonSecond.Size = new Size(23, 23);
+            DownArrowButtonSecond.TabIndex = 16;
+            DownArrowButtonSecond.UseVisualStyleBackColor = true;
+            DownArrowButtonSecond.Click += DownArrowButtonSecond_Click;
+            // 
             // RockRoboVoicePackCreatorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(984, 461);
+            Controls.Add(UpArrowButtonSecond);
+            Controls.Add(DownArrowButtonSecond);
+            Controls.Add(UpArrowButtonFirst);
+            Controls.Add(DownArrowButtonFirst);
             Controls.Add(IsUseFileNameFromFinalListCheckBox);
             Controls.Add(FinalFileNameMaskTextBox);
             Controls.Add(FinalFileNameMaskLabel);
@@ -323,5 +392,10 @@ namespace RockRoboVoicePackCreator
         private CheckBox IsUseFileNameFromFinalListCheckBox;
         private ContextMenuStrip FilesListBoxContextMenuStrip;
         private ToolStripMenuItem RemoveRowColorContextStripMenuItem;
+        private Button DownArrowButtonFirst;
+        private Button UpArrowButtonFirst;
+        private Button UpArrowButtonSecond;
+        private Button DownArrowButtonSecond;
+        private ToolStripMenuItem MarkProcessedLinesInOtherListsStripMenuItem;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using NLog;
 using RockRoboVoicePackCreator.Dictionaries;
+using RockRoboVoicePackCreator.Interfaces;
 using RockRoboVoicePackCreator.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -305,8 +306,8 @@ namespace RockRoboVoicePackCreator.Helpers
         public static int GetListBoxSelectedIndex(object sender) => ((ListBox)sender)?.SelectedIndex ?? -1;
 
         public static bool HasFilesListBox_RightMouseUp(
-            object sender, 
-            MouseEventArgs e, 
+            object sender,
+            MouseEventArgs e,
             ContextMenuStrip contextMenuStrip)
         {
             bool result = false;
@@ -326,6 +327,54 @@ namespace RockRoboVoicePackCreator.Helpers
             }
 
             return result;
+        }
+
+        public static void SelectNextItemInListBox(ListBox lb)
+        {
+            if (lb.Items.Count == 0)
+            {
+                return;
+            }
+
+            if (lb.SelectedIndex < lb.Items.Count - 1 ||
+                lb.SelectedIndex == -1)
+            {
+                lb.SelectedIndex++;
+            }
+            else
+            {
+                lb.SelectedIndex = 0;
+            }
+        }
+
+        public static void SelectPreviousItemInListBox(ListBox lb)
+        {
+            if (lb.Items.Count == 0)
+            {
+                return;
+            }
+
+            if (lb.SelectedIndex > 0)
+            {
+                lb.SelectedIndex--;
+            }
+            else
+            {
+                lb.SelectedIndex = lb.Items.Count - 1;
+            }
+        }
+
+        public static void MarkProcessedLinesInOtherLists(
+            Collection<VisualFinalFileInfoModel> finalFiles,
+            Collection<FileInfoModel> firstListFiles,
+            Collection<FileInfoModel> secondListFiles)
+        {
+            foreach (VisualFinalFileInfoModel finalFile in finalFiles
+                .Where(finalFile => finalFile.File?.Path.HasValue() ?? false))
+            {
+                MarkFileRowByPath(finalFile.File!.Path!, firstListFiles);
+                MarkFileRowByPath(finalFile.File!.Path!, secondListFiles);
+            }
         }
 
         #endregion
@@ -425,6 +474,16 @@ namespace RockRoboVoicePackCreator.Helpers
             }
 
             return string.Empty;
+        }
+
+        private static void MarkFileRowByPath(
+            string path,
+            Collection<FileInfoModel> fileInfoModels)
+        {
+            foreach (FileInfoModel file in fileInfoModels.Where(file => file.Path == path))
+            {
+                file.SetColor(Colors.LightGreen);
+            }
         }
 
         #endregion
